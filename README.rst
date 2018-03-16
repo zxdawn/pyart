@@ -1,5 +1,11 @@
 .. -*- mode: rst -*-
 
+这个雷达数据处理库Fork自ARM-DOE，在原来库的基础上加入了S波段雷达数据的读取，并且与PyART库的其他函数相兼容。直接将此库clone到本地然后执行 
+
+python setup.py install
+
+-----------------------以下为原库的README内容-------------------------------------------
+
 |Travis|_ |AppVeyor|_
 
 .. |Travis| image:: https://api.travis-ci.org/ARM-DOE/pyart.png?branch=master
