@@ -1,22 +1,6 @@
 """
-pyart.io.nexrad_level2
+pyart.io.sband_radar
 ======================
-
-.. autosummary::
-    :toctree: generated/
-    :template: dev_template.rst
-
-    NEXRADLevel2File
-
-.. autosummary::
-    :toctree: generated/
-
-    _decompress_records
-    _get_record_from_buf
-    _get_msg31_data_block
-    _structure_size
-    _unpack_from_buf
-    _unpack_structure
 
 
 """
@@ -29,18 +13,12 @@ import numpy as np
 
 class SbandRadarFile(object):
     """
-    Class for accessing data in a NEXRAD (WSR-88D) Level II file.
-
-    NEXRAD Level II files [1]_, also know as NEXRAD Archive Level II or
-    WSR-88D Archive level 2, are available from the NOAA National Climate Data
-    Center [2]_ as well as on the UCAR THREDDS Data Server [3]_.  Files with
-    uncompressed messages and compressed messages are supported.  This class
-    supports reading both "message 31" and "message 1" type files.
+    Class for accessing data in a S band file.
 
     Parameters
     ----------
     filename : str
-        Filename of Archive II file to read.
+        Filename of S band file to read.
 
     Attributes
     ----------
@@ -59,14 +37,6 @@ class SbandRadarFile(object):
         A list of all records (message) in the file.
     _fh : file-like
         File like object from which data is read.
-    _msg_type : '31' or '1':
-        Type of radial messages in file
-
-    References
-    ----------
-    .. [1] http://www.roc.noaa.gov/WSR88D/Level_II/Level2Info.aspx
-    .. [2] http://www.ncdc.noaa.gov/
-    .. [3] http://thredds.ucar.edu/thredds/catalog.html
 
     """
     def __init__(self, filename):
@@ -89,7 +59,7 @@ class SbandRadarFile(object):
             pos, dic = _get_record_from_buf(buf, pos)
             self._records.append(dic)
 
-        # pull out radial records (1 or 31) which contain the moment data.
+        # pull out radial records which contain the moment data.
         self.radial_records = [r for r in self._records]
 
         elev_nums = np.array([m['msg_header']['elevation_number']
@@ -106,26 +76,7 @@ class SbandRadarFile(object):
     def close(self):
         """ Close the file. """
         self._fh.close()
-
-    def location(self):
-        """
-        Find the location of the radar.
-
-        Returns all zeros if location is not available.
-
-        Returns
-        -------
-        latitude: float
-            Latitude of the radar in degrees.
-        longitude: float
-            Longitude of the radar in degrees.
-        height : int
-            Height of radar and feedhorn in meters above mean sea level.
-
-        """
         
-        return 0.0, 0.0, 0.0
-
     def scan_info(self, scans=None):
         """
         Return a list of dictionaries with scan information.

@@ -1,6 +1,6 @@
 .. -*- mode: rst -*-
-* Read Chinese S-band radars and map to a Cartesian grid
-========================================================
+Read Chinese S-band radars and map to a Cartesian grid
+======================================================
 
 The part of reading S-band data is forked from https://github.com/bugsuse/pyart.
 
