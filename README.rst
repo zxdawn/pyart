@@ -1,4 +1,22 @@
 .. -*- mode: rst -*-
+* Read Chinese S-band radars and map to a Cartesian grid
+========================================================
+
+The part of reading S-band data is forked from https://github.com/bugsuse/pyart.
+
+If you want to use all of these functions, you must install pyart from this source::
+
+  git clone https://github.com/zxdawn/pyart.git
+
+To install in your home directory, use::
+
+  python setup.py install --user
+
+To install for all users on Unix/Linux::
+
+  python setup.py build
+  sudo python setup.py install
+
 The Python ARM Radar Toolkit (Py-ART)
 =====================================
 
