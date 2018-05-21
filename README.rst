@@ -17,8 +17,11 @@ To install for all users on Unix/Linux::
   python setup.py build
   sudo python setup.py install
 
-Tutorial: `Using crfmapdisplay to map many S-band radars to a Cartesian grid
-<https://github.com/zxdawn/pyart/blob/xin_dev/notebooks/Using%20crfmapdisplay%20to%20map%20many%20S-band%20radars%20to%20a%20Cartesian%20grid.ipynb>`_
+Tutorials: 
+
+* `Using crfmapdisplay to map many S-band radars to a Cartesian grid <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Using_crfmapdisplay_to_map_many_S-band_radars_to_a_Cartesian_grid.ipynb>`_
+
+* `Examples for reading S-band radar <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Examples_for_reading_S_band_radar.ipynb>`_
 
 The Python ARM Radar Toolkit (Py-ART)
 =====================================
