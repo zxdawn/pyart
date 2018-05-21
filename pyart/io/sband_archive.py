@@ -1,22 +1,8 @@
 """
-pyart.io.nexrad_archive
+pyart.io.sband_archive
 =======================
 
-Functions for reading NEXRAD Level II Archive files.
-
-.. autosummary::
-    :toctree: generated/
-    :template: dev_template.rst
-
-    _NEXRADLevel2StagedField
-
-.. autosummary::
-    :toctree: generated/
-
-    read_nexrad_archive
-    _find_range_params
-    _find_scans_to_interp
-    _interpolate_scan
+Functions for reading S band Archive files.
 
 """
 
@@ -32,24 +18,24 @@ from pyart.io.nexrad_archive import NEXRADLevel2File
 from pyart.lazydict import LazyLoadDict
 from pyart.io.nexrad_interpolate import _fast_interpolate_scan
 
+<<<<<<< HEAD
 def read_sband_archive(filename, lon, lat, alt,
                         field_names=None, additional_metadata=None,
+=======
+def read_sband_archive(filename, field_names=None, additional_metadata=None,
+>>>>>>> 70a2716e11d04fcb122983810e580d4b06a56333
                         file_field_names=False, exclude_fields=None,
                         delay_field_loading=False, station=None, scans=None,
                         linear_interp=True, **kwargs):
     """
-    Read a NEXRAD Level 2 Archive file.
+    Read a S band Archive file.
 
     Parameters
     ----------
     filename : str
-        Filename of NEXRAD Level 2 Archive file.  The files hosted by
-        at the NOAA National Climate Data Center [1]_ as well as on the
-        UCAR THREDDS Data Server [2]_ have been tested.  Other NEXRAD
-        Level 2 Archive files may or may not work.  Message type 1 file
-        and message type 31 files are supported.
+        Filename of S band Archive file.  
     field_names : dict, optional
-        Dictionary mapping NEXRAD moments to radar field names. If a
+        Dictionary mapping S band moments to radar field names. If a
         data type found in the file does not appear in this dictionary or has
         a value of None it will not be placed in the radar.fields dictionary.
         A value of None, the default, will use the mapping defined in the
@@ -61,7 +47,7 @@ def read_sband_archive(filename, lon, lat, alt,
         introduct any addition metadata and the file specific or default
         metadata as specified by the metadata configuration file will be used.
     file_field_names : bool, optional
-        True to use the NEXRAD field names for the field names. If this
+        True to use the S band field names for the field names. If this
         case the field_names parameter is ignored. The field dictionary will
         likely only have a 'data' key, unless the fields are defined in
         `additional_metadata`.
@@ -73,11 +59,9 @@ def read_sband_archive(filename, lon, lat, alt,
         key in a particular field dictionary is accessed.  In this case
         the field attribute of the returned Radar object will contain
         LazyLoadDict objects not dict objects.
-    station : str or None, optional
-        Four letter ICAO name of the NEXRAD station used to determine the
-        location in the returned radar object.  This parameter is only
-        used when the location is not contained in the file, which occur
-        in older NEXRAD message 1 files.
+    station : tuple or None, optional
+        Three float tuple, include latitude, longitude and height of S band radar,
+        first latitude, second longitude, third height (units: metre)
     scans : list or None, optional
         Read only specified scans from the file.  None (the default) will read
         all scans.
@@ -93,11 +77,6 @@ def read_sband_archive(filename, lon, lat, alt,
     radar : Radar
         Radar object containing all moments and sweeps/cuts in the volume.
         Gates not collected are masked in the field data.
-
-    References
-    ----------
-    .. [1] http://www.ncdc.noaa.gov/
-    .. [2] http://thredds.ucar.edu/thredds/catalog.html
 
     """
     # test for non empty kwargs
@@ -128,7 +107,7 @@ def read_sband_archive(filename, lon, lat, alt,
 
     # metadata
     metadata = filemetadata('metadata')
-    metadata['original_container'] = 'NEXRAD Level II'
+    metadata['original_container'] = 'S band'
     vcp_pattern = nfile.get_vcp_pattern()
     if vcp_pattern is not None:
         metadata['vcp_pattern'] = vcp_pattern
@@ -281,7 +260,7 @@ def _find_scans_to_interp(scan_info, first_gate, gate_spacing, filemetadata):
 
 
 def _interpolate_scan(mdata, start, end, moment_ngates, linear_interp=True):
-    """ Interpolate a single NEXRAD moment scan from 1000 m to 250 m. """
+    """ Interpolate a single S band moment scan from 1000 m to 250 m. """
     fill_value = -9999
     data = mdata.filled(fill_value)
     scratch_ray = np.empty((data.shape[1], ), dtype=data.dtype)
@@ -293,7 +272,7 @@ def _interpolate_scan(mdata, start, end, moment_ngates, linear_interp=True):
 
 class _NEXRADLevel2StagedField(object):
     """
-    A class to facilitate on demand loading of field data from a Level 2 file.
+    A class to facilitate on demand loading of field data from a S band file.
     """
 
     def __init__(self, nfile, moment, max_ngates, scans):
