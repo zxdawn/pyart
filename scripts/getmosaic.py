@@ -73,7 +73,8 @@ def download(urls, region, savepath, debug):
                     print (name, 'exists in', savepath, ' Skip!!')
                 else:
                     print ('Downloading',name)
-                    urllib.request.urlretrieve(url, fullfilename)
+            
+            urllib.request.urlretrieve(url, fullfilename)
 
         except urllib.error.HTTPError as err:
             # pass
