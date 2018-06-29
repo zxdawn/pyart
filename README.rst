@@ -41,7 +41,7 @@ To download all mosaics to current directory::
 To specify region and savepath, please check optional arguments.
 
 Arguments:
-  region: chinaall (default), dongbei, huabei, huanan, huazhong, xibei, xinan, huadong
+  region: chinaall, dongbei, huabei, huanan, huazhong, xibei, xinan, huadong
 
   resolution: medium (default), small
 
