@@ -1,4 +1,5 @@
 .. -*- mode: rst -*-
+
 Read Chinese S-band radars and map to a Cartesian grid
 ======================================================
 
@@ -22,6 +23,36 @@ Tutorials:
 * `Using crfmapdisplay to map many S-band radars to a Cartesian grid <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Using_crfmapdisplay_to_map_many_S-band_radars_to_a_Cartesian_grid.ipynb>`_
 
 * `Examples for reading S-band radar <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Examples_for_reading_S_band_radar.ipynb>`_
+
+Download radar mosaic from NMC automatically
+============================================
+
+Image Source: `NMC <http://www.nmc.cn>`_
+
+To use this function, you can download getmosaic.py from /scripts.
+
+Usage
+-----
+
+To download all mosaics to current directory::
+
+  python getmosaic.py
+
+To specify region and savepath, please check optional arguments.
+
+Arguments:
+  region: chinaall (default), dongbei, huabei, huanan, huazhong, xibei, xinan, huadong
+
+  resolution: medium (default), small
+
+  debug: 0 (default), 1, 2.......
+
+  savepath
+
+Example: ::
+
+  python getmosaic.py -r <region> -s <savepath> -p <resolution> -d <debug>
+
 
 The Python ARM Radar Toolkit (Py-ART)
 =====================================
