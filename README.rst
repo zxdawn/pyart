@@ -29,19 +29,20 @@ Download radar mosaic from NMC automatically
 
 Image Source: `NMC <http://www.nmc.cn>`_
 
-To use this function, you can download getmosaic.py from /scripts.
+To use this function, you can download get_mosaics.py from /scripts.
 
 Usage
 -----
 
-To download all mosaics to current directory::
+To download all mosaics (regions and stations) to current directory::
 
-  python getmosaic.py
+  python get_mosaics.py
 
-To specify region and savepath, please check optional arguments.
+To specify region, resolution, debug_level and savepath, please check optional arguments.
 
 Arguments:
-  region: chinaall, dongbei, huabei, huanan, huazhong, xibei, xinan, huadong
+
+  region: all (default,regions+stations), regions, stations
 
   resolution: medium (default), small
 
@@ -51,8 +52,50 @@ Arguments:
 
 Example: ::
 
-  python getmosaic.py -r <region> -s <savepath> -p <resolution> -d <debug>
+  python get_mosaics.py -r <region> -s <savepath> -p <resolution> -d <debug>
 
+Directroy structure (depended on NMC website): ::
+
+  ├── regions
+  │   ├── chinaall
+  │   ├── dongbei
+  │   ├── huabei
+  │   ├── huadong
+  │   ├── huanan
+  │   ├── huazhong
+  │   ├── xibei
+  │   └── xinan
+  ├── stations
+  │   ├── an-hui
+  │   ├── bei-jing
+  │   ├── chong-qing
+  │   ├── fu-jian
+  │   ├── gan-su
+  │   ├── guang-dong
+  │   ├── guang-xi
+  │   ├── gui-zhou
+  │   ├── hai-nan
+  │   ├── he-bei
+  │   ├── hei-long-jiang
+  │   ├── he-nan
+  │   ├── hu-bei
+  │   ├── hu-nan
+  │   ├── jiang-su
+  │   ├── jiang-xi
+  │   ├── ji-lin
+  │   ├── liao-ning
+  │   ├── nei-meng
+  │   ├── ning-xia
+  │   ├── qing-hai
+  │   ├── shan-dong
+  │   ├── shang-hai
+  │   ├── shan-xi
+  │   ├── si-chuan
+  │   ├── tian-jin
+  │   ├── xi-cang
+  │   ├── xin-jiang
+  │   ├── yun-nan
+  │   └── zhe-jiang
 
 The Python ARM Radar Toolkit (Py-ART)
 =====================================
