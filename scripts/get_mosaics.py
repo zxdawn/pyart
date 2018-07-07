@@ -79,6 +79,7 @@ def get_img_urls(url, resolution):
 
 def download(urls, region, resolution, savepath, debug):
     # Download images to savepath
+    savepath = os.path.join(savepath, region)
     if region == 'regions':
         print ('Downloading regional radar maps......')
     elif region == 'stations':
