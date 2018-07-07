@@ -77,19 +77,7 @@ def get_img_urls(url, resolution):
     return img_urls
 
 
-def check_path(savepath, debug):
-    if not os.path.exists(savepath):
-        if debug > 0:
-            print ('mkdir '+savepath)
-        os.makedirs(savepath)
-
-
 def download(urls, region, resolution, savepath, debug):
-    # Check whether savepath exists. If not, create it.
-    check_path(savepath, debug)
-    savepath = os.path.join(savepath, region)
-    check_path(savepath, debug)
-
     # Download images to savepath
     if region == 'regions':
         print ('Downloading regional radar maps......')
