@@ -120,14 +120,14 @@ def download(urls, region, resolution, savepath, debug):
 
                 fullfilename = os.path.join(full_savepath, name+'.png')
 
-                if debug > 0:
-                    if os.path.isfile(fullfilename):
+                if os.path.isfile(fullfilename):
+                    if debug > 0:
                         print ('    ', name, 'exists in', full_savepath, ' Skip!!')
-                    else:
+                else:
+                    urllib.request.urlretrieve(html, fullfilename)
+                    if debug > 0:
                         print ('        Downloading',name)
                 
-                urllib.request.urlretrieve(html, fullfilename)
-
         except urllib.error.HTTPError as err:
             # pass
             print(err.code)
