@@ -34,45 +34,66 @@ def parse_args():
 # Get main urls
 def get_main_url(base_url, suffix):
     htmls =[]
-    base_page = requests.get(base_url)
-    soup = BeautifulSoup(base_page.content, 'html.parser')
-    for link in soup.findAll('a'):
-        sub_htmls = link.get('href')
-        if sub_htmls.startswith('/publish/radar/') & sub_htmls.endswith(suffix):
-            htmls.append(sub_htmls)
+    while htmls == []:
+        try:
+            base_page = requests.get(base_url)
+            soup = BeautifulSoup(base_page.content, 'html.parser')
+            for link in soup.findAll('a'):
+                sub_htmls = link.get('href')
+                if sub_htmls.startswith('/publish/radar/') & sub_htmls.endswith(suffix):
+                    htmls.append(sub_htmls)
+        except:
+            print("Connection of main_url refused by the server..")
+            print("Let me sleep for 5 seconds")
+            print("ZZzzzz...")
+            sleep(5)
 
     return ['{}{}'.format(domain_name,html) for html in list(set(htmls))]
 
 
 def get_stations_url(base_url, suffix):
     htmls =[]
-    base_page = requests.get(base_url)
-    soup = BeautifulSoup(base_page.content, 'html.parser')
-    for link in soup.findAll('a'):
-        sub_htmls = link.get('href')
-        if sub_htmls.startswith('/publish/radar/') & sub_htmls.endswith(suffix):
-            # Filter out Surpluses
-            if sub_htmls.split("/")[3] == base_url.split("/")[5]:
-                htmls.append(sub_htmls)
+    while htmls == []:
+        try:
+            base_page = requests.get(base_url)
+            soup = BeautifulSoup(base_page.content, 'html.parser')
+            for link in soup.findAll('a'):
+                sub_htmls = link.get('href')
+                if sub_htmls.startswith('/publish/radar/') & sub_htmls.endswith(suffix):
+                    # Filter out Surpluses
+                    if sub_htmls.split("/")[3] == base_url.split("/")[5]:
+                        htmls.append(sub_htmls)
+        except:
+            print("Connection of stations_url refused by the server..")
+            print("Let me sleep for 5 seconds")
+            print("ZZzzzz...")
+            sleep(5)
 
     return ['{}{}'.format(domain_name,html) for html in list(set(htmls))]
 
 
-
 def get_img_urls(url, resolution):
-    # Download the Response object and parse
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'html.parser')
+    page = ''
+    while page == '':
+        try:
+            # Download the Response object and parse
+            page = requests.get(url)
+            soup = BeautifulSoup(page.content, 'html.parser')
 
-    # Finding all instances of 'img' at once
-    pics = soup.find_all('p', class_='img')
+            # Finding all instances of 'img' at once
+            pics = soup.find_all('p', class_='img')
 
-    # get url of each picture and save to a list
-    img_urls = []
-    for pic in pics:
-        img_url = pic.img.get('data-original')
-        img_urls.append(img_url)
-    img_urls = [url.replace('small', resolution) for url in img_urls]
+            # get url of each picture and save to a list
+            img_urls = []
+            for pic in pics:
+                img_url = pic.img.get('data-original')
+                img_urls.append(img_url)
+            img_urls = [url.replace('small', resolution) for url in img_urls]
+        except:
+            print("Connection of img_urls refused by the server..")
+            print("Let me sleep for 5 seconds")
+            print("ZZzzzz...")
+            sleep(5)
 
     return img_urls
 
@@ -163,6 +184,9 @@ def download_imgs(region, resolution, savepath, debug):
 
 
 def main(region, resolution, savepath, debug):
+    s = requests.session()
+    s.keep_alive = False
+
     if region == 'all':
         download_imgs('regions', resolution, savepath, debug)
         download_imgs('stations', resolution, savepath, debug)
