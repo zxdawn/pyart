@@ -18,11 +18,14 @@ To install for all users on Unix/Linux::
   python setup.py build
   sudo python setup.py install
 
-Tutorials: 
+Tutorials
+---------
 
 * `Using crfmapdisplay to map many S-band radars to a Cartesian grid <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Using_crfmapdisplay_to_map_many_S-band_radars_to_a_Cartesian_grid.ipynb>`_
 
-* `Examples for reading S-band radar <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Examples_for_reading_S_band_radar.ipynb>`_
+* `Examples for reading S-band radar <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Reading_S_band_radar.ipynb>`_
+
+* `Examples for reading S-band radar (en) <https://github.com/zxdawn/pyart/blob/CNRAD/notebooks/Reading_S_band_radar_en.ipynb>`_
 
 Download radar mosaic from NMC automatically
 ============================================
@@ -40,7 +43,8 @@ To download all mosaics (regions and stations) to current directory::
 
 To specify region, resolution, debug_level and savepath, please check optional arguments.
 
-Arguments:
+Arguments
+>>>>>>>>>
 
   region: all (default,regions+stations), regions, stations
 
@@ -50,11 +54,20 @@ Arguments:
 
   savepath
 
-Example: ::
+Example
+>>>>>>>
+
+::
 
   python get_mosaics.py -r <region> -s <savepath> -p <resolution> -d <debug>
 
-Directroy structure (depended on NMC website): ::
+It's better to execute this scropt every hour: ::
+
+  while true; do python get_mosaics.py > log; sleep 3600; done &
+
+Directroy structure (depended on NMC website)
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+::
 
   ├── regions
   │   ├── chinaall
