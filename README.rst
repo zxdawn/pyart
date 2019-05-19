@@ -32,6 +32,8 @@ Download radar mosaic from NMC automatically
 
 Image Source: `NMC <http://www.nmc.cn>`_
 
+**!!! Please check https://github.com/zxdawn/nmc-crawler for newest script !!!**
+
 To use this function, you can download get_mosaics.py from /scripts.
 
 Usage
